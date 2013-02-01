@@ -277,6 +277,9 @@ var ScrollController = function() {
 	}
 
 	function init(opts) {
+		
+		console.log("ScrollController init.");
+		
 		var defaults = {
 			maxScroll : 1000,
 			tickSpeed : 30,
