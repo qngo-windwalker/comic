@@ -1,19 +1,32 @@
 var ScrollController = function() {
 	var settings = {}, page, started = false, paused = false, animation = null;
-	var w = $(window), d = $(document), touch = false, touchStart = {
+	var w = $(window), d = $(document), touch = false, // is touch device
+	touchStart = {
 		x : 0,
 		y : 0
-	}, scrollStart = 0, scrollTopTweened = 0, scrollTop = 0, scrollDirection = 0, autoScrollInterval;
+	}, // vars for touch
+	scrollStart = 0, // vars for scroll
+	scrollTopTweened = 0, scrollTop = 0, scrollDirection = 0, autoScrollInterval;
+
+	//--------------------------------------------------
+	//Animation Controller
+	//--------------------------------------------------
 	function animationLoop() {
-		console.log('scroll controller animationLoop()');
 		requestAnimFrame(animationLoop);
+
 		if (paused)
 			return;
+
 		if (Math.ceil(scrollTopTweened) !== Math.floor(scrollTop)) {
+			//Smooth out scrolling action
 			scrollTopTweened += settings.tweenSpeed * (scrollTop - scrollTopTweened);
+			//Direction
 			scrollDirection = scrollTop > scrollTopTweened ? 1 : -1;
+
 			for (var i in animation) {
 				var anim = animation[i];
+
+				// check if animation is in range
 				if (scrollTopTweened >= anim.startAt && scrollTopTweened <= anim.endAt) {
 					startAnimatable(anim);
 					render(anim);
@@ -21,34 +34,39 @@ var ScrollController = function() {
 					stopAnimatable(anim);
 				}
 			}
+
+			// onAnimate callback
 			if ( typeof settings.onUpdate === 'function')
 				settings.onUpdate(scrollTopTweened);
 		}
 	}
 
-	var has3d = ('WebKitCSSMatrix' in window && 'm11' in new WebKitCSSMatrix())
-	var isiPad = navigator.userAgent.match(/iPad/i) != null;
-	var hascsstrans = Modernizr.csstransitions;
-	var isiPhone = navigator.userAgent.match(/android.+mobile|avantgo|android|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|meego.+mobile|midp|mmp|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows (ce|phone)|xda|xiino/i) != null;
-	
 	function render(anim) {
-		
-		console.log('scroll controller render()');
-		
+		//Calculate %
 		var progress = (anim.startAt - scrollTopTweened) / (anim.startAt - anim.endAt);
+		//Clamp progress between 0 and 100 percent (render is always called 1 lst time at the end to clean up)
 		progress = Math.max(0, Math.min(1, progress));
+		//Create new CSS properties map
 		var properties = {};
+
 		anim.lastProgress = progress;
-		var isMobile = (isiPhone || isiPad);
+
+		//Check and run keyframes within scroll range
 		if (anim.keyframes) {
 			for (var i = 1; i < anim.keyframes.length; i++) {
-				var keyframe = anim.keyframes[i], lastkeyframe = anim.keyframes[i - 1], keyframeProgress = (lastkeyframe.position - progress) / (lastkeyframe.position - keyframe.position);
+				var keyframe = anim.keyframes[i], lastkeyframe = anim.keyframes[i - 1], keyframeProgress = (lastkeyframe.position - progress ) / (lastkeyframe.position - keyframe.position );
+
 				if (keyframeProgress >= 0 && keyframeProgress <= 1) {
+
 					if (keyframe.onProgress && typeof keyframe.onProgress === 'function') {
 						keyframe.onProgress(keyframeProgress, scrollDirection);
 					}
-					for (var property in keyframe.properties) {
-						if (property === "background-position" && keyframe.properties[property].hasOwnProperty("x") && !isMobile) {
+
+					for (var property in keyframe.properties ) {
+
+						//Are we animating a background in more than X?
+						if (property === "background-position" && keyframe.properties[property].hasOwnProperty("x")) {
+							//Process the object
 							var startValues = keyframe.properties[property];
 							var endValues = lastkeyframe.properties[property];
 							var result = "";
@@ -63,68 +81,56 @@ var ScrollController = function() {
 							} else {
 								result += startValues.y
 							}
+							//console.log(result);
 							properties[property] = result;
-						} else if (property === "rotate" && !isMobile) {
-							properties["transform"] = "rotate(" + getTweenedValue(lastkeyframe.properties[property], keyframe.properties[property], keyframeProgress, 1, keyframe.ease) + "deg)";
-						} else if (property === "top" && has3d) {
-							properties["transform"] = "translateY(" + getTweenedValue(lastkeyframe.properties[property], keyframe.properties[property], keyframeProgress, 1, keyframe.ease) + "px)";
-						} else if (property === "translate3d") {
-							if (has3d) {
-								properties["transform"] = "translate3d(" + getTweenedValue(lastkeyframe.properties["ref-left"], keyframe.properties["ref-left"], keyframeProgress, 1, keyframe.ease) + "px, " + getTweenedValue(lastkeyframe.properties["ref-top"], keyframe.properties["ref-top"], keyframeProgress, 1, keyframe.ease) + "px, 0px)";
-							} else {
-								properties["top"] = getTweenedValue(lastkeyframe.properties["ref-top"], keyframe.properties["ref-top"], keyframeProgress, 1, keyframe.ease);
-								properties["left"] = getTweenedValue(lastkeyframe.properties["ref-left"], keyframe.properties["ref-left"], keyframeProgress, 1, keyframe.ease);
-							}
-						} else if (property === "rotateLeft") {
-							if (has3d && !isMobile) {
-								properties["transform"] = "rotate(" + getTweenedValue(lastkeyframe.properties["ref-rotate"], keyframe.properties["ref-rotate"], keyframeProgress, 1, keyframe.ease) + "deg) translate3d(" + getTweenedValue(lastkeyframe.properties["ref-left"], keyframe.properties["ref-left"], keyframeProgress, 1, keyframe.ease) + "px, 0px, 0px)";
-							} else {
-								properties["left"] = getTweenedValue(lastkeyframe.properties["ref-left"], keyframe.properties["ref-left"], keyframeProgress, 1, keyframe.ease);
-							}
-						} else if (property === "ref-rotate" || property === "ref-left" || property === "ref-top") {
-						} else if (property === "left" && has3d) {
-							properties["transform"] = "translate3d(" + getTweenedValue(lastkeyframe.properties[property], keyframe.properties[property], keyframeProgress, 1, keyframe.ease) + "px, 0px, 0px)";
-						} else if (property === "margin-left" && has3d) {
-							properties["transform"] = "translate3d(" + getTweenedValue(lastkeyframe.properties[property], keyframe.properties[property], keyframeProgress, 1, keyframe.ease) + "px, 0px, 0px)";
-						} else if (property === "margin-top" && has3d) {
-							properties["transform"] = "translate3d(0px, " + getTweenedValue(lastkeyframe.properties[property], keyframe.properties[property], keyframeProgress, 1, keyframe.ease) + "px, 0px)";
-						} else if (property === "scale" && !isMobile) {
-						} else if (property === "image") {
-							var id = Math.round(getTweenedValue(lastkeyframe.properties[property], keyframe.properties[property], keyframeProgress, 1, keyframe.ease));
-							$("#section10 img").not($("#section10-img" + id)).css({
-								"margin-top" : "200%"
-							});
-							$("#section10-img" + id).css({
-								"margin-top" : 0
-							});
 						} else {
+							//Just tween the value otherwise
 							properties[property] = getTweenedValue(lastkeyframe.properties[property], keyframe.properties[property], keyframeProgress, 1, keyframe.ease);
 						}
 					}
 				}
 			}
 		}
-		
+
+		// Apply all tweened css styles
 		anim._elem.css(properties);
+
+		// onProgress callback
 		if (anim.onProgress && typeof anim.onProgress === 'function') {
 			anim.onProgress.call(anim, progress);
 		}
+
 	}
 
+	// Run before animation starts when animation is in range
 	function startAnimatable(anim) {
+		// apply start properties
 		if (!anim._started) {
 			if (anim.onStartAnimate && typeof anim.onStartAnimate === 'function') {
 				anim.onStartAnimate.call(anim, scrollDirection);
 			} else {
 				anim._elem.css('display', 'block');
 			}
+
 			anim._started = true;
 		}
 	}
 
+	/* run after animation is out of range  */
 	function stopAnimatable(anim) {
-		if ((anim._started && anim.endAt < scrollTopTweened || anim._started && anim.startAt > scrollTopTweened) || (scrollDirection < 0 && anim.lastProgress > 0 && anim.startAt > scrollTopTweened) || (scrollDirection > 0 && anim.lastProgress < 1 && anim.endAt < scrollTopTweened)) {
+		/*if (scrollDirection<0 && anim.lastProgress>0 && anim.startAt > scrollTopTweened) {
+
+		console.log("fixed< "+anim.selector);
+		} else if (scrollDirection>0 && anim.lastProgress<1 && anim.endAt < scrollTopTweened) {
+
+		console.log("fixed> "+anim.selector);
+		}*/
+
+		// Apply end properties after items move out of range if they were running
+		if ((anim._started && anim.endAt < scrollTopTweened || anim._started && anim.startAt > scrollTopTweened ) || (scrollDirection < 0 && anim.lastProgress > 0 && anim.startAt > scrollTopTweened) || (scrollDirection > 0 && anim.lastProgress < 1 && anim.endAt < scrollTopTweened)) {
+
 			render(anim);
+
 			if (anim.onEndAnimate && typeof anim.onEndAnimate === 'function') {
 				anim.onEndAnimate.call(anim, scrollDirection);
 			} else {
@@ -132,47 +138,99 @@ var ScrollController = function() {
 			}
 			anim._started = false;
 		}
+		// else {
+		// 	//If they were not running, check items behind where we were scrolling to. Check if they did not complete
+		// 	//running in the right direction, and if not, clean then up
+		// 	if (scrollDirection<0 && anim.lastProgress>0 && anim.startAt > scrollTopTweened) {
+		// 		render( anim );
+		// 		console.log("fixed< "+anim.selector);
+		// 	} else if (scrollDirection>0 && anim.lastProgress<1 && anim.endAt < scrollTopTweened) {
+		// 		render( anim );
+		// 		console.log("fixed> "+anim.selector);
+		// 	}
+		// }
 	}
 
+	/*
+	 sets up all the start and end parameters for each animation
+	 this will run when our page is loaded and on resizing
+	 */
 	function setAnimatable() {
 		for (var i in animation) {
 			var anim = animation[i];
+
 			anim.lastProgress = 0;
+
+			// grab dom element
 			if (anim._elem == undefined) {
 				anim._elem = $(anim.selector);
 			}
+
 			if ( typeof anim.onInit == 'function')
 				anim.onInit.call(anim);
+
+			// iterate through keyframes
 			for (var k in anim.keyframes) {
 				var keyframe = anim.keyframes[k];
+
+				/*	// default starting properties
+				startProperties = {
+				display: 'none',
+				position: 'absolute'
+				};
+
+				// apply starting properties
+				if (keyframe.position == 0) {
+				anim._elem.css( $.extend( startProperties, keyframe.properties ) );
+				};*/
+
+				// setup keyframe 0
 				if (keyframe.position == 0) {
 					var nKeyframe = anim.keyframes[Number(k) + 1];
+					// next keyframe
 					for (var property in nKeyframe.properties) {
 						if (keyframe.properties[property] == undefined) {
+							// grab current offset and load into properties for keyframe 0
 							if (/left|top/.test(property)) {
 								keyframe.properties[property] = anim._elem.position()[property];
 							}
+
+							// todo: width & height
 						}
 					}
 				}
+
+				// fill in properties from current element
+				// find missing properties from last occurance of property
 				var bIndex = Number(k);
+				// start 1 back from current
+
 				while (bIndex > 0) {
 					var bKeyframe = anim.keyframes[bIndex];
+
 					for (var property in bKeyframe.properties) {
 						if (keyframe.properties[property] == undefined) {
 							keyframe.properties[property] = bKeyframe.properties[property];
 						}
 					}
+
 					bIndex--;
 				};
+
+				// onInit callback
 				if ( typeof keyframe.onInit == 'function')
 					keyframe.onInit(anim);
+
 			}
+
 		}
+
 	}
 
 	function resize() {
+
 		var container = settings.container;
+
 		page = {
 			wWidth : settings.container.width(),
 			wHeight : settings.container.height(),
@@ -181,16 +239,21 @@ var ScrollController = function() {
 				top : settings.container.height() / 2
 			}
 		};
+
+		// onResize callback
 		if (settings.onResize && typeof settings.onResize === 'function')
 			settings.onResize(page);
+
 		resetAnimatable();
 		setAnimatable();
 		start();
 	}
 
+	// resets animations
 	function resetAnimatable() {
 		for (var i in animation) {
 			var anim = animation[i];
+
 			if (anim._started) {
 				delete anim._elem;
 				delete anim._started;
@@ -198,26 +261,57 @@ var ScrollController = function() {
 		}
 	}
 
-	var reloading = false;
+	// --------------------------------------------------
+	// EVENT HANDLERS
+	// --------------------------------------------------
+
+	// window resize
 	function resizeHandler(e) {
-		window.groupSound.mute();
-		$(document).stopTime("resizzMe");
-		$(document).oneTime(1000, "resizzMe", function() {
-			window.groupSound.unmute();
-		});
 		resize();
 	}
 
+	// touch
+	function touchStartHandler(e) {
+		//e.preventDefault();
+		touchStart.x = e.touches[0].pageX;
 
+		// Store the position of finger on swipe begin:
+		touchStart.y = e.touches[0].pageY;
+
+		// Store scroll val on swipe begin:
+		scrollStart = scrollTop;
+	};
+
+	function touchEndHandler(e) {
+
+	}
+
+	function touchMoveHandler(e) {
+
+		e.preventDefault();
+		if (paused)
+			return;
+		var offset = {};
+		offset.x = touchStart.x - e.touches[0].pageX;
+
+		// Get distance finger has moved since swipe begin:
+		offset.y = touchStart.y - e.touches[0].pageY;
+
+		// Add finger move dist to original scroll value
+		scrollTop = Math.max(0, scrollStart + offset.y);
+		checkScrollExtents();
+	}
+
+	// scrollwheel
 	function wheelHandler(e, delta, deltaX, deltaY) {
-		// console.log("scroll controller wheelHandler");
 		if (paused)
 			return;
 		scrollTop -= delta * settings.scrollSpeed;
 		if (scrollTop < 0)
 			scrollTop = 0;
-		// checkScrollExtents();
+		checkScrollExtents();
 	};
+
 	function checkScrollExtents() {
 		if (scrollTop < 0)
 			scrollTop = 0;
@@ -225,95 +319,121 @@ var ScrollController = function() {
 			scrollTop = settings.maxScroll;
 	}
 
+	//--------------------------------------------------
+	// Helpers
+	//--------------------------------------------------
+
+	// get tweened values
 	function getTweenedValue(start, end, currentTime, totalTime, tweener) {
 		var delta = end - start;
 		var percentComplete = currentTime / totalTime;
 		if (!tweener)
 			tweener = TWEEN.Easing.Linear.EaseNone;
+
 		return tweener(percentComplete) * delta + start
 	}
 
-	function resetAnimation() {
-		animation = settings.animation;
+	// dected if touch events
+	function isTouch() {
+		return 'ontouchstart' in window;
 	}
 
-	function setSettings(settings) {
-		settings = settings;
-	}
-
+	// --------------------------------------------------
+	// PUBLIC
+	// --------------------------------------------------
 	function init(opts) {
-		console.log("ScrollController init.");
-		
-		
 		var defaults = {
 			maxScroll : 1000,
 			tickSpeed : 30,
-			scrollSpeed : 40,
-			directionTouch : [],
-			tweenSpeed : .5
+			scrollSpeed : 20,
+			useRAF : true,
+			tweenSpeed : .3
 		};
+
 		settings = $.extend(defaults, opts);
+
 		animation = settings.animation;
-		
-		
-		d.on('mousewheel', wheelHandler);
-		// w.on('resize', resizeHandler);/*
- * 
+		touch = isTouch();
+
+		if (touch) {
+			var container = settings.container[0];
+			container.addEventListener('touchstart', touchStartHandler, true);
+			container.addEventListener('touchmove', touchMoveHandler, true);
+			container.addEventListener('touchend', touchEndHandler, true);
+		}
+
+		d.on('mousewheel', wheelHandler);
+		w.on('resize', resizeHandler);
+
+		// animation loop
 		window.requestAnimFrame = (function() {
-			return function(callback) {
-				
-				console.log('requestAnimFrame');
-				window.setTimeout(callback, settings.tickSpeed);
-			}
+			if (settings.useRAF) {
+				return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame ||
+				function(callback) {
+					window.setTimeout(callback, settings.tickSpeed);
+				};
+			} else {
+				return function(callback) {
+					window.setTimeout(callback, settings.tickSpeed);
+				}
+			};
 		})();
- */
+
 		resize();
+
 		return this;
 	};
+
+	// start
 	function start() {
-		console.log("ScrollController start()");
 		if (!started && settings.startAt)
 			scrollTopTweened = scrollTop = settings.startAt;
+
 		scrollTop++;
+
 		if (!started) {
 			animationLoop();
 			started = true;
 		};
+
 		if (settings.onStart && typeof settings.onStart === 'function') {
 			settings.onStart();
 		}
 	};
+
 	function getPageInfo() {
 		return page;
 	};
+
 	function getScrollTop() {
 		return scrollTopTweened;
 	};
+
 	function getMaxScroll() {
 		return settings.maxScroll;
 	};
+
 	function scrollTo(scroll) {
+
 		if (paused)
 			return;
 		scrollTop = scroll;
 	};
+
 	function autoScrollStart() {
 		if (autoScrollInterval)
 			return;
-		autoScrollInterval = setInterval(aScroll, 50);
+		autoScrollInterval = setInterval(aScroll, 100);
 	}
 
 	function autoScrollStop() {
 		clearInterval(autoScrollInterval);
-		autoScrollInterval = null;
 	}
 
 	function aScroll() {
-		scrollTop += 9;
-		if (scrollTop >= settings.maxScroll) {
-			autoScrollStop();
-			$("#autoplay").addClass("disabled");
-		}
+		scrollTop += 5;
+		if (scrollTop > settings.maxScroll)
+			scrollTop = scrollTopTweened = 0;
 	}
 
 	function stopScroll() {
@@ -328,13 +448,40 @@ var ScrollController = function() {
 		paused = false;
 	}
 
+	function toggleDebug() {
+		if (settings.debugId == false || settings.debugId == undefined) {
+			console.log('debug on');
+			settings.debugId = true;
+			$('#status2').show();
+			$('#status').show();
+		} else {
+			console.log('debug off');
+			settings.debugId = false;
+			$('#status2').hide();
+			$('#status').hide();
+		}
+
+		for (var i in animation) {
+			var anim = animation[i];
+
+			if (settings.debugId == true) {
+				anim._elem.css('border', '1px dashed red');
+			} else {
+				anim._elem.css('border', '');
+				$('body').find('.debugid').remove();
+			}
+		}
+	};
+
+	function isDebug() {
+		return settings.debug;
+	};
+
 	return {
 		init : init,
 		start : start,
 		pause : pauseScroll,
 		resume : resumeScroll,
-		resetAnimation : resetAnimation,
-		setSettings : setSettings,
 		getPageInfo : getPageInfo,
 		getScrollTop : getScrollTop,
 		getMaxScroll : getMaxScroll,
@@ -342,6 +489,8 @@ var ScrollController = function() {
 		autoScrollStop : autoScrollStop,
 		stopScroll : stopScroll,
 		scrollTo : scrollTo,
+		isDebug : isDebug,
+		toggleDebug : toggleDebug,
 		resize : resize
 	}
 };

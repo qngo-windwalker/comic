@@ -84,6 +84,7 @@ $(document).ready(function () {
         });
     }
     
+
     // $("#stat").hide();
     // $("#status").hide();
 });
@@ -949,6 +950,26 @@ var MainScroll = (function () {
         return false;
     }
     
+    
+	$('#cbt-player-main-prev').click(function(e) {
+		e.preventDefault();
+
+		gotoSection();
+		return false;
+	});
+	$('#cbt-player-main-next').click(function(e) {
+		e.preventDefault();
+
+		gotoSection();
+		return false;
+	}); 
+
+    function gotoSection()
+    {
+    	scrollContoller.scrollTo(4);
+    }
+    
+    
     var init = function (opts) {
     	//////////////////////////////////////////////////////////////////////////////////
     	console.log('Main scroll init');
@@ -1012,8 +1033,6 @@ var MainScroll = (function () {
                 }, scrollContoller;
                 maxScroll = clampHeight * 30.3;
                 firstPart = clampHeight * 6.2;
-                scrollContoller.setSettings(settings);
-                scrollContoller.resetAnimation();
                 reposBackground(HEIGHT);
                 if (clampHeight < 740) {
                     $("#section2-girl").css({
@@ -1046,11 +1065,14 @@ var MainScroll = (function () {
             scrollContoller.scrollTo($(this).data("ref"));
         });
         
-        $("#cbt-player-main-prev").bind("click", function () {
-            scrollContoller.scrollTo($(this).data("ref"));
+        $("#cbt-player-main-prev").bind("click", function () 
+        {
+            scrollContoller.scrollTo(4);
         });
-        $("#cbt-player-main-next").bind("click", function () {
-            scrollContoller.scrollTo($(this).data("ref"));
+        
+        $("#cbt-player-main-next").bind("click", function () 
+        {
+            scrollContoller.scrollTo(6);
         });
         
         
