@@ -260,8 +260,8 @@ var MainScroll = (function () {
     }
     
     function getAnimation() {
-        firstPart = clampHeight * 6.2
-        maxScroll: clampHeight * 6.3
+        // firstPart = clampHeight * 6.2
+        // maxScroll: clampHeight * 6.3
         var animation = [{
             selector: '#verticalScrollArea',
             startAt: 0,
@@ -277,25 +277,6 @@ var MainScroll = (function () {
                 ease: TWEEN.Easing.Linear.EaseNone,
                 properties: {
                     "top": -firstPart
-                }
-            }]
-        }, {
-            selector: '#invariant',
-            startAt: 0,
-            endAt: clampHeight * 0.2,
-            onEndAnimate: function (anim) {
-                $(document).stopTime("autoTimer");
-            },
-            keyframes: [{
-                position: 0,
-                properties: {
-                    "top": 0
-                }
-            }, {
-                position: 1,
-                ease: TWEEN.Easing.Linear.EaseNone,
-                properties: {
-                    "top": -95
                 }
             }]
         }, {
@@ -460,50 +441,6 @@ var MainScroll = (function () {
                 }
             }]
         }, {
-            selector: '#shuffle1-content .sport',
-            startAt: clampHeight * 1.7,
-            endAt: clampHeight * 2,
-            onEndAnimate: function (anim) {
-                if (anim == 1) {
-                    $(this.selector).addClass("selected");
-                } else {
-                    $(this.selector).removeClass("selected")
-                }
-                // if (anim == 1) _gaq.push(['_trackPageview', '/shuffle1']);
-            },
-            keyframes: [{
-                position: 0,
-                properties: {}
-            }, {
-                position: 1,
-                ease: TWEEN.Easing.Linear.EaseNone,
-                properties: {}
-            }]
-        }, {
-            selector: '#shuffle1-content .sport',
-            startAt: clampHeight * 2,
-            endAt: clampHeight * 2.3,
-            onEndAnimate: function (anim) {
-                if (isMobile == false) {
-                    if (anim == "1") {
-                        // soundZev.fadeOut(600);
-                        // soundSport.fadeTo(musicVolume, 600);
-                    } else {
-                        // soundSport.fadeOut(600);
-                        // soundZev.fadeTo(musicVolume, 600);
-                    }
-                    // soundAuto.stop();
-                }
-            },
-            keyframes: [{
-                position: 0,
-                properties: {}
-            }, {
-                position: 1,
-                ease: TWEEN.Easing.Linear.EaseNone,
-                properties: {}
-            }]
-        }, {
             selector: '#section3-girl',
             startAt: clampHeight * 2.3,
             endAt: clampHeight * 4.2,
@@ -625,36 +562,6 @@ var MainScroll = (function () {
                 }
             }]
         }, {
-            selector: '#shuffle2-content .wd',
-            startAt: clampHeight * 6.25,
-            endAt: clampHeight * 6.40,
-            onEndAnimate: function (anim) {
-                if (anim == 1) {
-                    // _gaq.push(['_trackPageview', '/shuffle2']);
-                    $(this.selector).addClass("selected");
-                } else {
-                    $(this.selector).removeClass("selected")
-                }
-                if (isMobile == false) {
-                    if (anim == "1") {
-                        // soundSport.fadeOut(600);
-                        // soundAuto.fadeTo(musicVolume, 600);
-                    } else {
-                        // soundAuto.fadeOut(600);
-                        // soundSport.fadeTo(musicVolume, 600);
-                    }
-                    // soundZev.stop();
-                }
-            },
-            keyframes: [{
-                position: 0,
-                properties: {}
-            }, {
-                position: 1,
-                ease: TWEEN.Easing.Linear.EaseNone,
-                properties: {}
-            }]
-        }, {
             selector: '#horizontalScrollArea',
             startAt: clampHeight * 6.4,
             endAt: clampHeight * 6.8,
@@ -712,37 +619,6 @@ var MainScroll = (function () {
                 }
             }]
         }, {
-            selector: '#shuffle5-content .zev',
-            startAt: clampHeight * 16.72,
-            endAt: clampHeight * 16.86,
-            onEndAnimate: function (anim) {
-                if (anim == 1) {
-                    $(this.selector).addClass("selected");
-                } else {
-                    $(this.selector).removeClass("selected")
-                }
-                if (isMobile == false) {
-                    if (anim == "1") {
-                        // soundAuto.fadeOut(600);
-                        // soundZev2.fadeTo(musicVolume, 600);
-                    } else {
-                        // soundZev2.fadeOut(600);
-                        // soundAuto.fadeTo(musicVolume, 600);
-                    }
-                    // soundZev.stop();
-                    // soundAuto.stop();
-                    // soundSport.stop();
-                }
-            },
-            keyframes: [{
-                position: 0,
-                properties: {}
-            }, {
-                position: 1,
-                ease: TWEEN.Easing.Linear.EaseNone,
-                properties: {}
-            }]
-        }, {
             selector: '#top',
             startAt: clampHeight * 28.11,
             endAt: clampHeight * 30.08,
@@ -780,43 +656,36 @@ var MainScroll = (function () {
             startAt: clampHeight * 0.7,
             endAt: clampHeight * 0.8,
             onEndAnimate: function (anim) {
-                // if (anim == 1) _gaq.push(['_trackPageview', '/section2']);
             }
         }, {
             startAt: clampHeight * 1.8,
             endAt: clampHeight * 1.9,
             onEndAnimate: function (anim) {
-                // if (anim == 1) _gaq.push(['_trackPageview', '/section3']);
             }
         }, {
             startAt: clampHeight * 3.6,
             endAt: clampHeight * 3.7,
             onEndAnimate: function (anim) {
-                // if (anim == 1) _gaq.push(['_trackPageview', '/section4']);
             }
         }, {
             startAt: clampHeight * 4.9,
             endAt: clampHeight * 5,
             onEndAnimate: function (anim) {
-                // if (anim == 1) _gaq.push(['_trackPageview', '/section5']);
             }
         }, {
             startAt: clampHeight * 10.3,
             endAt: clampHeight * 10.4,
             onEndAnimate: function (anim) {
-                // if (anim == 1) _gaq.push(['_trackPageview', '/shuffle3']);
             }
         }, {
             startAt: clampHeight * 13.7,
             endAt: clampHeight * 13.8,
             onEndAnimate: function (anim) {
-                // if (anim == 1) _gaq.push(['_trackPageview', '/shuffle4']);
             }
         }, {
             startAt: clampHeight * 16.5,
             endAt: clampHeight * 16.6,
             onEndAnimate: function (anim) {
-                // if (anim == 1) _gaq.push(['_trackPageview', '/shuffle5']);
             }
         }, {
             startAt: clampHeight * 0.51,
@@ -830,58 +699,36 @@ var MainScroll = (function () {
             startAt: clampHeight * 2.42,
             endAt: clampHeight * 2.67,
             onEndAnimate: function (anim) {
-                if (anim == 1 && isMobile == false) {
-                    event2.play();
-                }
             }
         }, {
             startAt: clampHeight * 4.58,
             endAt: clampHeight * 4.59,
             onEndAnimate: function (anim) {
-                if (anim == 1 && isMobile == false) {
-                    event3.play();
-                }
             }
         }, {
             startAt: clampHeight * 7.46,
             endAt: clampHeight * 7.47,
             onEndAnimate: function (anim) {
-                if (anim == 1 && isMobile == false) {
-                    event4.play();
-                }
             }
         }, {
             startAt: clampHeight * 8.4,
             endAt: clampHeight * 8.41,
             onEndAnimate: function (anim) {
-                if (anim == 1 && isMobile == false) {
-                    event5.play();
-                }
             }
         }, {
             startAt: 0,
             endAt: 0.01,
             onEndAnimate: function (anim) {
-                if (isMobile) {
-                    if (anim == 1) $("#verticalContainer").show();
-                }
             }
         }, {
             startAt: clampHeight * 4.91,
             endAt: clampHeight * 4.92,
             onEndAnimate: function (anim) {
-                if (isMobile) {
-                    if (anim == 1) $("#horizontalContainer").show();
-                }
             }
         }, {
             startAt: clampHeight * 6.91,
             endAt: clampHeight * 6.92,
             onEndAnimate: function (anim) {
-                if (isMobile) {
-                    if (anim == 1) $("#verticalContainer").hide();
-                    else $("#verticalContainer").show();
-                }
             }
         }];
         return animation;
@@ -900,21 +747,7 @@ var MainScroll = (function () {
         return (max - min) / (bottom - top) * (cur - top) + min;
     }
     
-    function activateScrollBar(thumbHeight) {
-    	//////////////////////////////////////////////////////////////////////////////////
-    	console.log('Activate scrollbar.');
-    	
-        scrollThumbHeight = thumbHeight;
-        scrollThumbPosition = 0;
-        scrollPercent = 0;
-        isScrolling = false;
-        $scrollBar = $('#scrollBar');
-        $scrollBar.show();
-        $scrollThumb = $('#scrollBar .bg-track');
-        $scrollThumb.css('height', scrollThumbHeight + "px");
-        $scrollThumb.bind('mousedown', startScroll);
-    }
-
+   
     function resizeScrollBar() {
         scrollBarHeight = wHeight;
         $scrollBar.css('height', scrollBarHeight + "px");
@@ -929,15 +762,7 @@ var MainScroll = (function () {
         return false;
     }
 
-    function scrollUpdate(event) {
-        scrollThumbPosition = event.pageY + thumbDelta;
-        scrollThumbPosition = Math.max(0, Math.min(scrollBarHeight - scrollThumbHeight, scrollThumbPosition));
-        scrollPercent = scrollThumbPosition / (scrollBarHeight - scrollThumbHeight);
-        scrollPercent = Math.max(0, Math.min(1, scrollPercent));
-        scrollContoller.scrollTo(maxScroll * scrollPercent);
-        return false;
-    }
-
+   
     function setScrollBarPosition(percent) {
         scrollThumbPosition = (scrollBarHeight - scrollThumbHeight) * percent;
         $scrollThumb.css('top', scrollThumbPosition);
@@ -949,26 +774,6 @@ var MainScroll = (function () {
         $(document).unbind('mouseup', endScroll);
         return false;
     }
-    
-    
-	$('#cbt-player-main-prev').click(function(e) {
-		e.preventDefault();
-
-		gotoSection();
-		return false;
-	});
-	$('#cbt-player-main-next').click(function(e) {
-		e.preventDefault();
-
-		gotoSection();
-		return false;
-	}); 
-
-    function gotoSection()
-    {
-    	scrollContoller.scrollTo(4);
-    }
-    
     
     var init = function (opts) {
     	//////////////////////////////////////////////////////////////////////////////////
@@ -1006,6 +811,7 @@ var MainScroll = (function () {
         scrollContoller = ScrollController();
         
         scrollContoller.init({
+        	// debugId: true,
             animation: animation,
             maxScroll: maxScroll,
             tickSpeed: 20,
@@ -1047,17 +853,7 @@ var MainScroll = (function () {
                 if ($scrollBar) setScrollBarPosition(scrollTop / maxScroll);
             }
         });
-        $("#autoplay").bind("click", function () {
-        	/*
-        	 * 
-            $(this).toggleClass("disabled");
-            if ($(this).hasClass("disabled")) {
-                scrollContoller.autoScrollStop();
-            } else {
-                scrollContoller.autoScrollStart();
-            }
-        	 */
-        });
+        
         $("#sound").bind("click", function () {
             $(this).toggleClass("disabled");
         });
@@ -1072,9 +868,16 @@ var MainScroll = (function () {
         
         $("#cbt-player-main-next").bind("click", function () 
         {
-            scrollContoller.scrollTo(6);
+            scrollContoller.scrollTo(3106);
         });
         
+        
+		$('#section1-start').click(function(e) {
+			e.preventDefault();
+	
+			scrollContoller.scrollTo(2000);
+			return false;
+		}); 
         
         return scrollContoller;
     }

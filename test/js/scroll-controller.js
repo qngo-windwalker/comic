@@ -265,43 +265,6 @@ var ScrollController = function() {
 	// EVENT HANDLERS
 	// --------------------------------------------------
 
-	// window resize
-	function resizeHandler(e) {
-		resize();
-	}
-
-	// touch
-	function touchStartHandler(e) {
-		//e.preventDefault();
-		touchStart.x = e.touches[0].pageX;
-
-		// Store the position of finger on swipe begin:
-		touchStart.y = e.touches[0].pageY;
-
-		// Store scroll val on swipe begin:
-		scrollStart = scrollTop;
-	};
-
-	function touchEndHandler(e) {
-
-	}
-
-	function touchMoveHandler(e) {
-
-		e.preventDefault();
-		if (paused)
-			return;
-		var offset = {};
-		offset.x = touchStart.x - e.touches[0].pageX;
-
-		// Get distance finger has moved since swipe begin:
-		offset.y = touchStart.y - e.touches[0].pageY;
-
-		// Add finger move dist to original scroll value
-		scrollTop = Math.max(0, scrollStart + offset.y);
-		checkScrollExtents();
-	}
-
 	// scrollwheel
 	function wheelHandler(e, delta, deltaX, deltaY) {
 		if (paused)
@@ -318,6 +281,12 @@ var ScrollController = function() {
 		else if (scrollTop > settings.maxScroll)
 			scrollTop = settings.maxScroll;
 	}
+	
+	// window resize
+	function resizeHandler(e) {
+		resize();
+	}
+
 
 	//--------------------------------------------------
 	// Helpers
@@ -333,10 +302,6 @@ var ScrollController = function() {
 		return tweener(percentComplete) * delta + start
 	}
 
-	// dected if touch events
-	function isTouch() {
-		return 'ontouchstart' in window;
-	}
 
 	// --------------------------------------------------
 	// PUBLIC
@@ -353,14 +318,6 @@ var ScrollController = function() {
 		settings = $.extend(defaults, opts);
 
 		animation = settings.animation;
-		touch = isTouch();
-
-		if (touch) {
-			var container = settings.container[0];
-			container.addEventListener('touchstart', touchStartHandler, true);
-			container.addEventListener('touchmove', touchMoveHandler, true);
-			container.addEventListener('touchend', touchEndHandler, true);
-		}
 
 		d.on('mousewheel', wheelHandler);
 		w.on('resize', resizeHandler);

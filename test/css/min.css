@@ -7,33 +7,20 @@ body { overflow: hidden; width: 100%; height: 100%; background-color: #000; colo
 .tooltip_arrow { height: 12px; background-position: center top; background-repeat: no-repeat }
 .tooltip2 { height: 24px; color: #fff; text-align: center; padding: 8px0 0 0 }
 .tooltip_arrow2 { height: 12px; background-position: center top; background-repeat: no-repeat }
-.mobile .optimizeMe { -webkit-transform: translate3d(0px, 0px, 0px) }
 #scrollBar { position: absolute; z-index: 1000; top: 0px; height: 100%; right: 0px; width: 7px; background-color: #000; z-index: 999 }
-.mobile #scrollBar { display: none }
 .bg-track { position: absolute; top: 0px; right: 0px; height: 40px; width: 100%; background-color: #fff }
 #invariant { position: absolute; top: -95px; left: 0px; width: 100%; height: 95px; z-index: 999; background-image: url("../images/menu.jpg"); background-repeat: repeat-x }
 #invariant-header { position: absolute; top: 0px; left: 50%; margin-left: -620px; width: 100%; height: 95px; background-image: url("../images/menu.png"); background-repeat: no-repeat }
 #autoplay { position: absolute; top: -23px; right: 140px; width: 106px; z-index: 999; height: 20px; background-image: url("../images/autoplay.png") }
-.ipad #autoplay { right: 40px }
-.fr #autoplay { right: 148px; width: 159px; background-image: url("../images/autoplay_fr.png") }
 #autoplay.disabled { background-position: 0px -20px }
 #sound.disabled { background-position: 0px -20px }
 #separation { position: absolute; top: -23px; right: 128px; margin-left: 513px; width: 8px; height: 20px; z-index: 999; background-image: url("../images/separation.png") }
-.fr #separation { right: 138px }
 #sound { position: absolute; top: -23px; right: 38px; width: 84px; z-index: 999; height: 20px; background-image: url("../images/sound.png") }
-.fr #sound { width: 100px; background-image: url("../images/sound_fr.png") }
 #scrollContainer { overflow: hidden; width: 100%; height: 100%; position: absolute; z-index: 1 }
 #status { z-index: 9999; position: fixed; bottom: 0px; right: 0px; background-color: #000; width: 150px; color: #fff; font-family: sans-serif; font-size: 9px; width: 100px; padding: 5px }
 #main { overflow: hidden; position: relative; width: 100%; height: 100% }
-#verticalContainer { position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; overflow: hidden }
-#horizontalContainer { position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; overflow: hidden }
-#verticalContainer2 { position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; overflow: hidden; z-index: 51 }
 #verticalScrollArea { position: absolute; top: 0px; left: 0px; width: 100%; height: 100% }
-#horizontalScroll2 { position: absolute; height: 100%; width: 100%; left: 0%; bottom: 0px; z-index: 54 }
-#verticalScrollArea2 { position: absolute; top: -100%; left: 0px; width: 100%; height: 100%; z-index: 51 }
 #horizontalScrollArea { position: absolute; height: 100%; width: 1000%; left: 100%; bottom: 0px; z-index: 51 }
-#horizontalScrollArea2 { position: absolute; height: 100%; width: 100%; left: 100%; bottom: 0px; z-index: 54 }
-.mobile #verticalScrollArea2, .mobile #horizontalContainer, .mobile #horizontalScroll2 { display: none }
 .section { position: relative; text-align: center; margin-left: auto; margin-right: auto }
 .content { position: relative; min-width: 768px; height: 100%; display: block; text-align: center; margin-left: auto; margin-right: auto }
 #loader { position: absolute; top: 0px; left: 0px; height: 100%; width: 100%; z-index: 999 }
@@ -74,26 +61,24 @@ body { overflow: hidden; width: 100%; height: 100%; background-color: #000; colo
 #progress { position: absolute; bottom: 0px; left: 0px; width: 0%; height: 100%; background-color: #fff }
 #processing { position: absolute; bottom: 250px; left: 50%; width: 77px; height: 17px; margin-left: -38px; background-image: url("../images/loader.png") }
 
-
 #section0 { height: 20%; background-color: #000; overflow: hidden; position: relative }
 #section1 { height: 100%; position: relative }
+#section1-start { display: block; width: 150px; height: 100px; position: absolute; top: 50%; right: 50%; background: #CCC;}
 #section1-desk { width: 1001px; height: 616px; position: absolute; top: 0px; right: 0px; margin-left: -500px; z-index: 100 }
 #section1-couple { width: 1003px; height: 623px; position: absolute; bottom: -100px; right: 0px; margin-left: -500px; background-image: url("../images/1/couple.png"); z-index: 100 }
 #section1-chair { height: 324px; width: 465px; position: absolute; top: 0px; left: 0px; z-index: 50; margin-top: 0% }
 #section1-girl { height: 521px; width: 452px; position: absolute; bottom: -60px; right: 400px; background-image: url("../images/1/girl.png") }
 #section-text { position: absolute; top: 0px; left: 0px; height: 100%; width: 100%; z-index: 99; overflow: hidden }
 #section1-text { height: 137px; width: 711px; position: fixed; top: 50%; margin-top: -70px; left: 50%; margin-left: -356px; background-image: url("../images/1/text.png") }
-.fr #section1-text { width: 793px; margin-left: -395px; background-image: url("../images/1/text_fr.png") }
 #section1-scroll { height: 24px; width: 113px; position: fixed; top: 50%; margin-top: 180px; left: 50%; margin-left: -56px; background-image: url("../images/1/scroll.png") }
-.fr #section1-scroll { width: 192px; height: 26px; margin-left: -96px; background-image: url("../images/1/scroll_fr.png") }
 #section1-arrow { height: 12px; width: 18px; position: fixed; top: 50%; margin-top: 250px; left: 50%; margin-left: -9px; background-image: url("../images/1/arrow.png") }
 #section1-better { height: 12px; width: 307px; position: fixed; top: 100%; left: 50%; margin-top: -22px; margin-left: -153px; background-image: url("../images/1/better.png") }
-.fr #section1-better { width: 315px; margin-left: -157px; background-image: url("../images/1/better_fr.png") }
+
 #section2 { height: 100%; position: relative }
-#section2 .content { height: 100%; width: 100%; position: relative; overflow: hidden }
-#section2-chair { height: 369px; width: 338px; position: absolute; bottom: -100px; left: 0px; z-index: 49 }
-#section2-girl { height: 740px; width: 613px; position: absolute; bottom: 0px; left: 50%; z-index: 50 }
+#section2 .content { width: 100%; overflow: hidden }
+#section2-next { display: block; width: 50px; height: 50px; position: absolute; top: 50%; right: 50%; background: #CCC; z-index: 2;}
 #section2-bg { position: absolute; top: 0px; left: 0px }
+
 #section3 { height: 100%; width: 100%; position: relative }
 #section3-girl { height: 712px; width: 468px; position: absolute; bottom: 0px; left: 50%; z-index: 49; display: block; margin-left: -90px }
 #section3-full { position: absolute; bottom: 50%; left: 50%; width: 1680px; height: 1280px; margin-bottom: -615px; margin-left: -350px; z-index: 50; background-image: url("../images/3/verre.png") }
@@ -112,51 +97,18 @@ body { overflow: hidden; width: 100%; height: 100%; background-color: #000; colo
 #final-link { height: 180px; width: 180px; position: absolute; top: 50%; left: 50%; margin-top: -90px; margin-left: -90px; border-radius: 100px }
 #final-link a { position: absolute; top: 0px; left: 0px; height: 100%; width: 100% }
 #top { position: absolute; top: 0px; left: 50%; margin-left: 209px; height: 34px; width: 138px; background-image: url("../images/final/top.png"); z-index: 99 }
-.mobile #top { display: none !important; visibility: hidden; opacity: 0 }
 #credits { position: absolute; top: 617px; right: 45px; width: 46px; height: 11px; background-image: url("../images/final/credits.png") }
-.fr #credits { background-image: url("../images/final/credits_fr.png") }
 #credits-popup { position: absolute; top: 617px; right: 45px; width: 158px; opacity: 0; height: 136px; display: none; background-repeat: no-repeat; background-image: url("../images/final/credits-popup.png") }
 #sylvain { position: absolute; top: 25px; left: 0px; width: 100%; height: 12px }
-.fr #top { margin-left: 209px; width: 188px; background-image: url("../images/final/top_fr.png") }
 #final-handler { position: absolute; top: 0%; left: 0px; width: 100%; margin-top: 0px; height: 100% }
 #technology { position: absolute; top: 0px; left: 50%; margin-left: -155px; height: 40px; width: 309px; background-image: url("../images/final/technology.png"); z-index: 99 }
-.fr #technology { margin-left: -160px; height: 40px; width: 320px; background-image: url("../images/final/technology_fr.png") }
 #findmore { position: absolute; top: 0px; left: 50%; margin-left: -103px; height: 60px; width: 206px; background-image: url("../images/final/findmore.png"); z-index: 99 }
-.fr #findmore { background-image: url("../images/final/findmore_fr.png") }
 #findout a { position: absolute; top: 0px; left: 0px; height: 100%; width: 100% }
 #email { position: absolute; top: 652px; left: 50%; margin-left: -434px; height: 234px; width: 234px; background-image: url("../images/final/email.png"); z-index: 99 }
 #plus { position: absolute; top: 601px; left: 50%; margin-left: -20px; height: 40px; width: 40px; background-image: url("../images/final/plus.png"); -webkit-transform: scale(0); -moz-transform: scale(0); -o-transform: scale(0); transform: scale(0) }
 #share { width: 133px; height: 9px; background-image: url("../images/final/share.png"); position: absolute; top: 0px; left: 50%; margin-left: -378px }
-.fr #share { width: 136px; height: 11px; background-image: url("../images/final/share_fr.png") }
 #twitter { position: absolute; top: 100%; left: 50%; margin-left: -189px; height: 36px; width: 36px; background-image: url("../images/final/twitter.png") }
 #facebook { position: absolute; top: 100%; left: 50%; margin-left: -222px; height: 36px; width: 36px; background-image: url("../images/final/fb.png") }
 #rond1 { width: 849px; height: 535px; position: absolute; top: -200px; left: -200px; background-image: url("../images/final/rond1.png"); opacity: 0 }
 #rond2 { width: 1235px; height: 369px; position: absolute; top: -300px; right: -300px; background-image: url("../images/final/rond2.png"); opacity: 0 }
-.has3d .cancelLeft { left: 0px !important; -webkit-transform: translate3d(100%, 0px, 0px) }
-.has3d .keepLeft { left: 0px !important; -webkit-transform: translate3d(0px, 0px, 0px) }
-.has3d .cancelTop { top: 0px !important; -webkit-transform: translate3d(0px, 100%, 0px) }
-.has3d .keepTop { top: 0px !important; -webkit-transform: translate3d(0px, 0px, 0px) }
-.has3d #section5-dog1 { -webkit-transform: translate3d(-200px, 0px, 0px) }
-.has3d #shuffle6 { left: 0px !important }
-.has3d #shuffle4 { left: 0px !important }
-.has3d #twitter, .has3d #facebook { top: 0px; -webkit-transform: translate3d(0px, 1000%, 0px) }
-.has3d #section2-girl { margin-left: 0px; -webkit-transform: translate3d(0px, 0px, 0px) }
-.has3d #section3-girl { margin-left: 0px; -webkit-transform: translate3d(-90px, 0px, 0px) }
-.has3d #section1-arrow { margin-top: 0px; -webkit-transform: translate3d(0px, 220px, 0px) }
-.has3d #section3-full { -webkit-transform: translate3d(-300px, 0px, 0px) }
-.has3d #section4-girl { -webkit-transform: translate3d(0px, 0px, 0px) }
-.has3d #section4-debris { margin-left: 0px; -webkit-transform: translate3d(-200px, 0px, 0px) }
-.has3d #section5-dog2 { margin-left: 0px; -webkit-transform: translate3d(-430px, 0px, 0px) }
-.has3d #verticalScrollArea2 { top: 0px; -webkit-transform: translate3d(0px, -100%, 0px) }
-.has3d #section15 { top: 0px; -webkit-transform: translate3d(0px, -100%, 0px) }
-.has3d #top { -webkit-transform: translate3d(0px, 307px, 0px); top: 0px }
-.has3d #technology { -webkit-transform: translate3d(0px, 50%, 0px); top: 0px }
-.has3d #findmore { -webkit-transform: translate3d(0px, 50%, 0px); top: 0px }
-.has3d #share { -webkit-transform: translate3d(0px, 548px, 0px); top: 0px }
-.has3d #section1-text { -webkit-transform: translate3d(0px, -70px, 0px); margin-top: 0px }
-.has3d #section1-scroll { -webkit-transform: translate3d(0px, 180px, 0px); margin-top: 0px }
-.has3d #section1-better { -webkit-transform: translate3d(0px, -22px, 0px); margin-top: 0px }
 
-.has3d #credits, .has3d #credits-popup { top: 0px }
-.mobile #invariant, .mobile #sound, .mobile #separation, .mobile #section1-better { display: none !important }
-.iphone #autoplay { top: 100% !important; margin-top: -70px; right: 30px }
