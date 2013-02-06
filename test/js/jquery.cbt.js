@@ -522,7 +522,6 @@ var MainScroll = (function () {
         return false;
     }
 
-
     function endScroll(event) {
         isScrolling = false;
         $(document).unbind('mousemove', scrollUpdate);
@@ -537,41 +536,19 @@ var MainScroll = (function () {
         settings = $.extend(defaults, opts);
             // $("#scrollBar").show();            
             //activateScrollBar(40);
-            
-        var directionTouch = [{
-            start: -1,
-            end: clampHeight * 6.45,
-            direction: "up"
-        }, {
-            start: clampHeight * 6.45,
-            end: clampHeight * 20.55,
-            direction: "left"
-        }, {
-            start: clampHeight * 20.55,
-            end: clampHeight * 24,
-            direction: "down"
-        }, {
-            start: clampHeight * 24,
-            end: clampHeight * 27.4,
-            direction: "left"
-        }, {
-            start: clampHeight * 27.4,
-            end: clampHeight * 35,
-            direction: "up"
-        }];
         
         scrollContoller = ScrollController();
         
         // This cannot be calculated since there's no way of monitoring assets load completed.
 
         scrollContoller.init({
+        	// This does not work.
         	debugId: true,
             animation: animation,
             // This cannot be calculated since there's no way of monitoring assets load completed.
             // 760 is the image's height multiple by 5
             maxScroll: 760 * 5,
             tickSpeed: 20,
-            directionTouch: directionTouch,
             scrollSpeed: 30,
             tweenSpeed: .4,
             startAt: settings.startAt,
