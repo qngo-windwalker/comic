@@ -12,6 +12,7 @@ var ScrollController = function() {
 	//Animation Controller
 	//--------------------------------------------------
 	function animationLoop() {
+		console.log('scrollController animationLoop()');
 		requestAnimFrame(animationLoop);
 
 		if (paused)
@@ -228,7 +229,9 @@ var ScrollController = function() {
 	}
 
 	function resize() {
-
+		
+		console.log('scrollController resize()');
+		
 		var container = settings.container;
 
 		page = {
@@ -284,6 +287,7 @@ var ScrollController = function() {
 	
 	// window resize
 	function resizeHandler(e) {
+		console.log('scrollController resizeHandler()');
 		resize();
 	}
 
@@ -324,6 +328,9 @@ var ScrollController = function() {
 
 		// animation loop
 		window.requestAnimFrame = (function() {
+			
+			console.log('scrollController window.requestAnimFrame()');
+			
 			if (settings.useRAF) {
 				return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame ||
 				function(callback) {
@@ -343,6 +350,7 @@ var ScrollController = function() {
 
 	// start
 	function start() {
+		console.log('scrollController start()' );
 		if (!started && settings.startAt)
 			scrollTopTweened = scrollTop = settings.startAt;
 
