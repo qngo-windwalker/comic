@@ -1,18 +1,14 @@
 var ScrollController = function() {
 	var settings = {}, page, started = false, paused = false, animation = null;
-	var w = $(window), d = $(document), touch = false, // is touch device
-	touchStart = {
-		x : 0,
-		y : 0
-	}, // vars for touch
-	scrollStart = 0, // vars for scroll
-	scrollTopTweened = 0, scrollTop = 0, scrollDirection = 0, autoScrollInterval;
+	var w = $(window), d = $(document),
+	
+	scrollTopTweened = 0, scrollTop = 0, autoScrollInterval;
 
 	//--------------------------------------------------
 	//Animation Controller
 	//--------------------------------------------------
 	function animationLoop() {
-		console.log('scrollController animationLoop()');
+		 // console.log('scrollController animationLoop()');
 		requestAnimFrame(animationLoop);
 
 		if (paused)
@@ -29,7 +25,7 @@ var ScrollController = function() {
 
 				// check if animation is in range
 				if (scrollTopTweened >= anim.startAt && scrollTopTweened <= anim.endAt) {
-					startAnimatable(anim);
+					 startAnimatable(anim);
 					render(anim);
 				} else {
 					stopAnimatable(anim);
@@ -43,6 +39,7 @@ var ScrollController = function() {
 	}
 
 	function render(anim) {
+		// console.log('scrollController render()');
 		//Calculate %
 		var progress = (anim.startAt - scrollTopTweened) / (anim.startAt - anim.endAt);
 		//Clamp progress between 0 and 100 percent (render is always called 1 lst time at the end to clean up)
@@ -55,39 +52,14 @@ var ScrollController = function() {
 		//Check and run keyframes within scroll range
 		if (anim.keyframes) {
 			for (var i = 1; i < anim.keyframes.length; i++) {
-				var keyframe = anim.keyframes[i], lastkeyframe = anim.keyframes[i - 1], keyframeProgress = (lastkeyframe.position - progress ) / (lastkeyframe.position - keyframe.position );
-
+				
+				var keyframe = anim.keyframes[i], lastkeyframe = anim.keyframes[i - 1], keyframeProgress = -progress / -keyframe.position;
+				
 				if (keyframeProgress >= 0 && keyframeProgress <= 1) {
 
-					if (keyframe.onProgress && typeof keyframe.onProgress === 'function') {
-						keyframe.onProgress(keyframeProgress, scrollDirection);
-					}
-
 					for (var property in keyframe.properties ) {
-
-						//Are we animating a background in more than X?
-						if (property === "background-position" && keyframe.properties[property].hasOwnProperty("x")) {
-							//Process the object
-							var startValues = keyframe.properties[property];
-							var endValues = lastkeyframe.properties[property];
-							var result = "";
-							if ( typeof startValues.x === "number") {
-								result += getTweenedValue(endValues.x, startValues.x, keyframeProgress, 1, keyframe.ease) + "px";
-							} else {
-								result += startValues.x
-							}
-							result += " ";
-							if ( typeof startValues.y === "number") {
-								result += getTweenedValue(endValues.y, startValues.y, keyframeProgress, 1, keyframe.ease) + "px";
-							} else {
-								result += startValues.y
-							}
-							//console.log(result);
-							properties[property] = result;
-						} else {
 							//Just tween the value otherwise
 							properties[property] = getTweenedValue(lastkeyframe.properties[property], keyframe.properties[property], keyframeProgress, 1, keyframe.ease);
-						}
 					}
 				}
 			}
@@ -100,7 +72,6 @@ var ScrollController = function() {
 		if (anim.onProgress && typeof anim.onProgress === 'function') {
 			anim.onProgress.call(anim, progress);
 		}
-
 	}
 
 	// Run before animation starts when animation is in range
@@ -291,13 +262,13 @@ var ScrollController = function() {
 		resize();
 	}
 
-
 	//--------------------------------------------------
 	// Helpers
 	//--------------------------------------------------
 
 	// get tweened values
 	function getTweenedValue(start, end, currentTime, totalTime, tweener) {
+		// console.log('scrollController getTweenedValue()');
 		var delta = end - start;
 		var percentComplete = currentTime / totalTime;
 		if (!tweener)
@@ -305,7 +276,6 @@ var ScrollController = function() {
 
 		return tweener(percentComplete) * delta + start
 	}
-
 
 	// --------------------------------------------------
 	// PUBLIC
@@ -334,10 +304,12 @@ var ScrollController = function() {
 			if (settings.useRAF) {
 				return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame ||
 				function(callback) {
+			console.log('scrollController window.requestAnimFrame() function 1');
 					window.setTimeout(callback, settings.tickSpeed);
 				};
 			} else {
 				return function(callback) {
+			console.log('scrollController window.requestAnimFrame() function 2');
 					window.setTimeout(callback, settings.tickSpeed);
 				}
 			};
