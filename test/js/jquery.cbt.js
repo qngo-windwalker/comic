@@ -151,6 +151,12 @@ var MainScroll = (function () {
                     "top": -firstPart
                 }
             }]
+        },{
+            selector: '#section0',
+            startAt: 0,
+            endAt: clampHeight * 0.6,
+            onEndAnimate: function (anim) {}
+           
         }, {
             selector: '#section1',
             startAt: 0,

@@ -21,7 +21,7 @@ body { overflow: hidden; width: 100%; height: 100%; background-color: #000; colo
 #main { overflow: hidden; position: relative; width: 100%; height: 100% }
 #verticalScrollArea { position: absolute; top: 0px; left: 0px; width: 100%; height: 100% }
 #horizontalScrollArea { position: absolute; height: 100%; width: 1000%; left: 100%; bottom: 0px; z-index: 51 }
-.section { position: relative; text-align: center; margin-left: auto; margin-right: auto }
+.section { position: relative; height: 100%; text-align: center; margin-left: auto; margin-right: auto }
 .content { position: relative; min-width: 768px; height: 100%; display: block; text-align: center; margin-left: auto; margin-right: auto }
 #loader { position: absolute; top: 0px; left: 0px; height: 100%; width: 100%; z-index: 999 }
 #invariant-logo { width: 233px; height: 19px; position: absolute; top: 22px; left: 50%; margin-left: -116px; background-image: url("../images/hybrid.jpg") }
@@ -35,20 +35,15 @@ body { overflow: hidden; width: 100%; height: 100%; background-color: #000; colo
 .auto { position: absolute; top: 0px; left: 0px; height: 100%; width: 100% }
 .wd { position: absolute; top: 0px; left: 0px; height: 100%; width: 100% }
 .shuffle-content { position: absolute; top: 0px; left: 0px; height: 100%; width: 100% }
-#shuffle1 { height: 100%; overflow: hidden; position: relative }
-#shuffle1 .zev { opacity: 1; display: block }
 #shuffle2 { height: 100%; overflow: hidden; position: relative }
 #shuffle2 .sport { opacity: 1; display: block }
-#shuffle3 { height: 100%; width: 10%; overflow: hidden; position: absolute; top: 0px; left: 0px; z-index: 52 }
-#shuffle3 .wd { opacity: 1; display: block }
-#shuffle4 { height: 100%; width: 10%; overflow: hidden; position: absolute; top: 0px; left: 100%; z-index: 53 }
-#shuffle4 .auto { opacity: 1; display: block }
-#shuffle5 { height: 100%; width: 10%; overflow: hidden; position: absolute; top: 0px; left: 100%; z-index: 54 }
-#shuffle5 .wd { opacity: 1; display: block }
 
 /*
  * 
  */
+
+.cbt-player-nav-section{display:block;}
+.debug .cbt-player-nav-section{border: 1px dashed red;}
 #cbt-player-container { overflow: hidden; position: relative; width: 960px; height: 720px; }
 
 #autoplay { position: absolute; top: -23px; right: 140px; width: 106px; z-index: 999; height: 20px; background-image: url("../images/autoplay.png") }
@@ -61,25 +56,21 @@ body { overflow: hidden; width: 100%; height: 100%; background-color: #000; colo
 #progress { position: absolute; bottom: 0px; left: 0px; width: 0%; height: 100%; background-color: #fff }
 #processing { position: absolute; bottom: 250px; left: 50%; width: 77px; height: 17px; margin-left: -38px; background-image: url("../images/loader.png") }
 
-#section0 { height: 20%; background-color: #000; overflow: hidden; position: relative }
-#section1 { height: 100%; position: relative }
-#section1-start { display: block; width: 150px; height: 100px; position: absolute; top: 50%; right: 50%; background: #CCC;}
-#section1-desk { width: 1001px; height: 616px; position: absolute; top: 0px; right: 0px; margin-left: -500px; z-index: 100 }
-#section1-chair { height: 324px; width: 465px; position: absolute; top: 0px; left: 0px; z-index: 50; margin-top: 0% }
+#section0-start { width: 150px; height: 100px; position: absolute; top: 50%; right: 50%; }
 
-#section2 { height: 100%; position: relative }
-#section2 .content { width: 100%; overflow: hidden }
-#section2-next { display: block; width: 50px; height: 50px; position: absolute; top: 50%; right: 50%; background: #CCC; z-index: 2;}
+#section1-next { width: 50px; height: 50px; position: absolute; top: 50%; right: 50%; z-index: 2;}
+
+#section2-next { display: block; width: 50px; height: 50px; position: absolute; top: 50%; right: 50%; z-index: 2;}
 #section2-bg { position: absolute; top: 0px; left: 0px }
 
-#section3 { height: 100%; width: 100%; position: relative }
-#section3-girl { height: 712px; width: 468px; position: absolute; bottom: 0px; left: 50%; z-index: 49; display: block; margin-left: -90px }
-#section3-full { position: absolute; bottom: 50%; left: 50%; width: 1680px; height: 1280px; margin-bottom: -615px; margin-left: -350px; z-index: 50; background-image: url("../images/3/verre.png") }
+#section3-next {width: 50px; height: 50px; position: absolute; top: 50%; right: 50%; z-index: 2;}
 #section3-bg { position: absolute; top: 0px; left: 0px }
-#section4 { height: 100%; overflow: hidden; position: relative }
-#section4-girl { height: 451px; width: 395px; position: absolute; bottom: -25px; left: 50%; margin-left: 0px; z-index: 49 }
-#section4-debris { height: 1085px; width: 666px; position: absolute; top: 0px; left: 50%; margin-bottom: -540px; margin-left: -200px; z-index: 49 }
+
+#section4-next-a {width: 50px; height: 50px; position: absolute; top: 10%; right: 50%; z-index: 2;}
+#section4-next-b {width: 50px; height: 50px; position: absolute; top: 40%; right: 50%; z-index: 2;}
+#section4-next-c {width: 50px; height: 50px; position: absolute; top: 80%; right: 50%; z-index: 2;}
 #section4-bg { position: absolute; top: 0px; left: 0px }
+
 #section5 { height: 100%; overflow: hidden; position: relative }
 #section5-dog1 { position: absolute; bottom: 0px; left: -200px; width: 635px; height: 720px }
 #section5-dog2 { position: absolute; top: 0px; left: 100%; margin-left: -430px; width: 430px; height: 523px }
@@ -95,13 +86,8 @@ body { overflow: hidden; width: 100%; height: 100%; background-color: #000; colo
 #sylvain { position: absolute; top: 25px; left: 0px; width: 100%; height: 12px }
 #final-handler { position: absolute; top: 0%; left: 0px; width: 100%; margin-top: 0px; height: 100% }
 #technology { position: absolute; top: 0px; left: 50%; margin-left: -155px; height: 40px; width: 309px; background-image: url("../images/final/technology.png"); z-index: 99 }
-#findmore { position: absolute; top: 0px; left: 50%; margin-left: -103px; height: 60px; width: 206px; background-image: url("../images/final/findmore.png"); z-index: 99 }
-#findout a { position: absolute; top: 0px; left: 0px; height: 100%; width: 100% }
 #email { position: absolute; top: 652px; left: 50%; margin-left: -434px; height: 234px; width: 234px; background-image: url("../images/final/email.png"); z-index: 99 }
 #plus { position: absolute; top: 601px; left: 50%; margin-left: -20px; height: 40px; width: 40px; background-image: url("../images/final/plus.png"); -webkit-transform: scale(0); -moz-transform: scale(0); -o-transform: scale(0); transform: scale(0) }
-#share { width: 133px; height: 9px; background-image: url("../images/final/share.png"); position: absolute; top: 0px; left: 50%; margin-left: -378px }
-#twitter { position: absolute; top: 100%; left: 50%; margin-left: -189px; height: 36px; width: 36px; background-image: url("../images/final/twitter.png") }
-#facebook { position: absolute; top: 100%; left: 50%; margin-left: -222px; height: 36px; width: 36px; background-image: url("../images/final/fb.png") }
 #rond1 { width: 849px; height: 535px; position: absolute; top: -200px; left: -200px; background-image: url("../images/final/rond1.png"); opacity: 0 }
 #rond2 { width: 1235px; height: 369px; position: absolute; top: -300px; right: -300px; background-image: url("../images/final/rond2.png"); opacity: 0 }
 
