@@ -253,7 +253,8 @@ var ScrollController = function() {
 		if (scrollTop < 0)
 			scrollTop = 0;
 		else if (scrollTop > settings.maxScroll)
-			scrollTop = settings.maxScroll;
+			console.log(scrollTop);
+			//scrollTop = settings.maxScroll;
 	}
 	
 	// window resize
@@ -282,7 +283,7 @@ var ScrollController = function() {
 	// --------------------------------------------------
 	function init(opts) {
 		var defaults = {
-			maxScroll : 1000,
+			maxScroll : 10000, // No effect
 			tickSpeed : 30,
 			scrollSpeed : 20,
 			useRAF : true,

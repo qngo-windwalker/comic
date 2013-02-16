@@ -31,7 +31,7 @@ $(document).ready(function () {
             	
                 var toLoad = retrieveImages($(data));
             	// console.log(toLoad);
-                var manuallyLoad = ["images/10/2.jpg", "images/10/3.jpg", "images/10/4.jpg", "images/10/5.jpg", "images/10/6.jpg", "images/10/7.jpg", "images/10/8.jpg", "images/10/9.jpg", "images/10/10.jpg", "images/10/11.jpg", "images/10/12.jpg", "images/10/13.jpg", "images/10/14.jpg", "images/10/15.jpg", "images/10/16.jpg", "images/10/17.jpg", "images/10/18.jpg", "images/10/19.jpg", "images/10/20.jpg", "images/10/21.jpg", "images/10/22.jpg", "images/10/23.jpg", "images/10/24.jpg"];
+                var manuallyLoad = ["images/0/screen2.jpg", "images/0/screen3.jpg", "images/0/screen4.jpg", "images/0/screen5.jpg", "images/0/screen6.jpg", "images/0/screen7.jpg", "images/0/screen8.jpg", "images/0/screen9.jpg", "images/0/screen10.jpg", "images/0/screen11.jpg", "images/0/screen12.jpg", "images/0/screen13.jpg", "images/0/screen14.jpg", "images/0/screen15.jpg", "images/0/screen16.jpg", "images/0/screen17.jpg", "images/0/screen18.jpg", "images/0/screen19.jpg", "images/0/screen20.jpg", "images/0/screen21.jpg", "images/0/screen22.jpg", "images/0/screen23.jpg", "images/0/screen24.jpg"];
                 var finalLoad = toLoad.concat(manuallyLoad);
                 
                 $("#scrollContainer").empty().html(data);
@@ -90,7 +90,6 @@ var MainScroll = (function () {
 	var w = $("#cbt-player-container");
     var clampWidth = w.width();
     var clampHeight = w.height();
-   
     
     console.log("clampHeight : " + clampHeight);
     
@@ -130,7 +129,7 @@ var MainScroll = (function () {
         });
         //soundZev.fadeTo(musicVolume, 600);
     }
-    var firstPart = clampHeight * 6.2;
+    var firstPart = clampHeight * 1006.2; // This has something to do with limiing scroll height
     var animation = getAnimation();
 
     function getAnimation() {
@@ -141,6 +140,7 @@ var MainScroll = (function () {
             onEndAnimate: function (anim) {},
             keyframes: [{
                 position: 0,
+                ease: TWEEN.Easing.Linear.EaseNone,
                 properties: {
                     "top": 0
                 }
@@ -148,7 +148,7 @@ var MainScroll = (function () {
                 position: 1,
                 ease: TWEEN.Easing.Linear.EaseNone,
                 properties: {
-                    "top": -firstPart
+                    "top": -firstPart // This also has something to do with limiting scroll height
                 }
             }]
         },{
@@ -161,67 +161,6 @@ var MainScroll = (function () {
             selector: '#section1',
             startAt: 0,
             endAt: clampHeight * 0.6,
-            onEndAnimate: function (anim) {}
-           
-        }, {
-            selector: '#section1-desk',
-            startAt: 0,
-            endAt: clampHeight * 0.2,
-            onEndAnimate: function (anim) {}
-        }, {
-            selector: '#section2-chair',
-            startAt: clampHeight * 0.5,
-            endAt: clampHeight * 2.4,
-            onEndAnimate: function (anim) {}
-        }, {
-            selector: '#section2-girl',
-            startAt: clampHeight * 0.4,
-            endAt: clampHeight * 2.4,
-            onEndAnimate: function (anim) {}
-        }, {
-            selector: '#section3-girl',
-            startAt: clampHeight * 2.3,
-            endAt: clampHeight * 4.2,
-            onEndAnimate: function (anim) {}
-        }, {
-            selector: '#section3-full',
-            startAt: clampHeight * 2.3,
-            endAt: clampHeight * 4.2,
-            onEndAnimate: function (anim) {}
-           
-        }, {
-            selector: '#section4-girl',
-            startAt: clampHeight * 3.6,
-            endAt: clampHeight * 5.2,
-            onEndAnimate: function (anim) {}
-           
-        }, {
-            selector: '#section4-debris',
-            startAt: clampHeight * 3.6,
-            endAt: clampHeight * 5.2,
-            onEndAnimate: function (anim) {}
-          
-        }, {
-            selector: '#section5 .content',
-            startAt: clampHeight * 5,
-            endAt: clampHeight * 5.5,
-            onEndAnimate: function (anim) {}
-          
-        }, {
-            selector: '#section5-dog1',
-            startAt: clampHeight * 4.2,
-            endAt: clampHeight * 6.2,
-            onEndAnimate: function (anim) {}
-          
-        }, {
-            selector: '#section5-dog2',
-            startAt: clampHeight * 4.2,
-            endAt: clampHeight * 6.2,
-            onEndAnimate: function (anim) {}
-        }, {
-            selector: '#horizontalScrollArea',
-            startAt: clampHeight * 6.4,
-            endAt: clampHeight * 6.8,
             onEndAnimate: function (anim) {}
            
         }, {
@@ -321,7 +260,7 @@ var MainScroll = (function () {
             animation: animation,
             // This cannot be calculated since there's no way of monitoring assets load completed.
             // 760 is the image's height multiple by 5
-            maxScroll: 760 * 5,
+            maxScroll: 7060 * 40, 
             tickSpeed: 20,
             scrollSpeed: 30,
             tweenSpeed: .4,
