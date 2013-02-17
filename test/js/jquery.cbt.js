@@ -81,7 +81,6 @@ $(document).ready(function () {
         });
     }
     
-
     // $("#stat").hide();
     // $("#status").hide();
 });
@@ -100,7 +99,6 @@ var MainScroll = (function () {
         tracking: false,
         firstPart: clampHeight * 6.2,
     }, scrollContoller;
-    
     
     var isScrolling, thumbDelta, scrollThumbPosition;
     var isMobile = navigator.userAgent.match(/android|avantgo|android|Android|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od|ad)|iris|kindle|lge |maemo|meego.+mobile|midp|mmp|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows (ce|phone)|xda|xiino/i) != null;
@@ -152,47 +150,6 @@ var MainScroll = (function () {
                 }
             }]
         },{
-            selector: '#section0',
-            startAt: 0,
-            endAt: clampHeight * 0.6,
-            onEndAnimate: function (anim) {}
-           
-        }, {
-            selector: '#section1',
-            startAt: 0,
-            endAt: clampHeight * 0.6,
-            onEndAnimate: function (anim) {}
-           
-        }, {
-            selector: '#shuffle4-content .wd',
-            startAt: clampHeight * 13.77,
-            endAt: clampHeight * 13.91,
-            onEndAnimate: function (anim) {
-                if (anim == 1) {
-                    $(this.selector).addClass("selected");
-                } else {
-                    $(this.selector).removeClass("selected")
-                }
-                if (isMobile == false) {
-                }
-            }
-        }, {
-            selector: '#shuffle5',
-            startAt: clampHeight * 15,
-            endAt: clampHeight * 15.88,
-            onEndAnimate: function (anim) {}
-        }, {
-            selector: '#top',
-            startAt: clampHeight * 28.11,
-            endAt: clampHeight * 30.08,
-            onEndAnimate: function (anim) {}
-        }, {
-            selector: '#final-bg',
-            startAt: clampHeight * 28.80,
-            endAt: clampHeight * 30.08,
-            onEndAnimate: function (anim) {}
-         
-        }, {
             startAt: clampHeight * 0.51,
             endAt: clampHeight * 0.52,
             onEndAnimate: function (anim) {
@@ -213,15 +170,6 @@ var MainScroll = (function () {
         }];
         return animation;
     }
-    /*
-     * 
-    // end getAnimation
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
-     */
 
     function getCurrent(cur, top, bottom, min, max) {
         return (max - min) / (bottom - top) * (cur - top) + min;

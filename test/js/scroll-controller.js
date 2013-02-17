@@ -352,7 +352,6 @@ var ScrollController = function() {
 	};
 
 	function scrollTo(scroll) {
-
 		if (paused)
 			return;
 		scrollTop = scroll;
