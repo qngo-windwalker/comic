@@ -20,7 +20,8 @@ $(document).ready(function () {
 	setScene();
 	
 	function setScene() {
-        var urlExperience = "prescription-drugs.html";
+        // var urlExperience = "prescription-drugs.html";
+        var urlExperience = "other-war.html";
         $.manageAjax.add('ajaxProfile', {
             abortOld: true,
             preventDoubbleRequests: true,
@@ -31,8 +32,8 @@ $(document).ready(function () {
             	
                 var toLoad = retrieveImages($(data));
             	// console.log(toLoad);
-                var manuallyLoad = ["images/0/screen2.jpg", "images/0/screen3.jpg", "images/0/screen4.jpg", "images/0/screen5.jpg", "images/0/screen6.jpg", "images/0/screen7.jpg", "images/0/screen8.jpg", "images/0/screen9.jpg", "images/0/screen10.jpg", "images/0/screen11.jpg", "images/0/screen12.jpg", "images/0/screen13.jpg", "images/0/screen14.jpg", "images/0/screen15.jpg", "images/0/screen16.jpg", "images/0/screen17.jpg", "images/0/screen18.jpg", "images/0/screen19.jpg", "images/0/screen20.jpg", "images/0/screen21.jpg", "images/0/screen22.jpg", "images/0/screen23.jpg", "images/0/screen24.jpg"];
-                var finalLoad = toLoad.concat(manuallyLoad);
+               // var manuallyLoad = ["images/0/screen2.jpg", "images/0/screen3.jpg", "images/0/screen4.jpg", "images/0/screen5.jpg", "images/0/screen6.jpg", "images/0/screen7.jpg", "images/0/screen8.jpg", "images/0/screen9.jpg", "images/0/screen10.jpg", "images/0/screen11.jpg", "images/0/screen12.jpg", "images/0/screen13.jpg", "images/0/screen14.jpg", "images/0/screen15.jpg", "images/0/screen16.jpg", "images/0/screen17.jpg", "images/0/screen18.jpg", "images/0/screen19.jpg", "images/0/screen20.jpg", "images/0/screen21.jpg", "images/0/screen22.jpg", "images/0/screen23.jpg", "images/0/screen24.jpg"];
+                //var finalLoad = toLoad.concat(manuallyLoad);
                 
                 $("#scrollContainer").empty().html(data);
                 
@@ -47,7 +48,7 @@ $(document).ready(function () {
                         });
                     },
                     onFinish: function () {
-                        start();                    }
+                       start();                    }
                 });
             },
             url: urlExperience

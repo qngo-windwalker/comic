@@ -43,4 +43,33 @@ body { overflow: hidden; width: 100%; height: 100%; background-color: #000; colo
 #section4-next-c {width: 50px; height: 50px; top: 80%; right: 50%; }
 
 
+/*
+ * The Other War
+ */
+.cbt-other-war .section a.cbt-nav-start-over{ width: 958px; height: 42px; top: 93.5%; right: 0; }
 
+.cbt-other-war #intro { height: 100%; position: absolute; top: 0px; left: 0px; width: 100%; background: url("../../images/comics/other-war/intro.jpg") top center no-repeat #000; background-size: auto 100%; overflow: hidden; position: relative; z-index: 998 }
+
+.cbt-other-war #section0-start { width: 150px; height: 100px; top: 72%; right:42%; }
+
+.cbt-other-war #section4-next-a {width: 500px; height: 180px; top: 7%; right: 0; }
+.cbt-other-war #section4-next-b {width: 500px; height: 210px; top: 33%; right: 0; }
+.cbt-other-war #section4-next-c {width: 516px; height: 250px; top: 64%; right: 0; }
+
+.cbt-other-war #section7-next-a {width: 486px; height: 238px; top: 8.5%; right: 0; }
+.cbt-other-war #section7-next-b {width: 500px; height: 352px; top: 44%; right: 0.5%; }
+
+.cbt-other-war #section13-next-a {width: 486px; height: 238px; top: 8.5%; right: 0; }
+.cbt-other-war #section13-next-b {width: 500px; height: 352px; top: 44%; right: 0.5%; }
+
+.cbt-other-war #section17-next-a {width: 486px; height: 238px; top: 8.5%; right: 0; }
+.cbt-other-war #section17-next-b {width: 500px; height: 352px; top: 44%; right: 0.5%; }
+
+.cbt-other-war #section24-next-a {width: 486px; height: 238px; top: 8.5%; right: 0; }
+.cbt-other-war #section24-next-b {width: 500px; height: 352px; top: 44%; right: 0.5%; }
+
+.cbt-other-war #section30-next-a {width: 486px; height: 248px; top: 8.5%; right: 0; }
+.cbt-other-war #section30-next-b {width: 500px; height: 342px; top: 45%; right: 0.5%; }
+
+.cbt-other-war #section37-next-a {width: 486px; height: 238px; top: 8.5%; right: 0; }
+.cbt-other-war #section37-next-b {width: 500px; height: 352px; top: 44%; right: 0.5%; }
